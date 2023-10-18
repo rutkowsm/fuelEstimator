@@ -14,13 +14,13 @@ house_volume['medium'] = fuzz.trimf(house_volume.universe, [300, 500, 700])
 house_volume['large'] = fuzz.trimf(house_volume.universe, [600, 800, 1000])
 
 # Define membership functions for expected_temperature
-required_temperature['cold'] = fuzz.trimf(required_temperature.universe, [18, 20, 22])
-required_temperature['medium'] = fuzz.trimf(required_temperature.universe, [21, 23, 24])
-required_temperature['warm'] = fuzz.trimf(required_temperature.universe, [23, 24, 25])
+required_temperature['cold'] = fuzz.trimf(required_temperature.universe, [18, 19, 21])
+required_temperature['medium'] = fuzz.trimf(required_temperature.universe, [20, 21, 23])
+required_temperature['warm'] = fuzz.trimf(required_temperature.universe, [22, 24, 25])
 
-avg_temperature_forecast['cold'] = fuzz.trimf(avg_temperature_forecast.universe, [-20, -10, -5])
-avg_temperature_forecast['moderate'] = fuzz.trimf(avg_temperature_forecast.universe, [-10, -5, 0])
-avg_temperature_forecast['warm'] = fuzz.trimf(avg_temperature_forecast.universe, [-2, 5, 12])
+avg_temperature_forecast['cold'] = fuzz.trimf(avg_temperature_forecast.universe, [-20, -12, -8])
+avg_temperature_forecast['moderate'] = fuzz.trimf(avg_temperature_forecast.universe, [-11, -5, 0])
+avg_temperature_forecast['warm'] = fuzz.trimf(avg_temperature_forecast.universe, [-1, 7, 12])
 
 
 # Define membership functions for gas_needed
@@ -46,9 +46,9 @@ system = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5, rule6, rule7, ru
 simulation = ctrl.ControlSystemSimulation(system)
 
 # Set Input Values
-simulation.input['house_volume'] = 350  # Example house volume in m^3
-simulation.input['required_temperature'] = 23  # Example expected temperature in °C
-simulation.input['avg_temperature_forecast'] = -9  # Example outside temperature in °C
+simulation.input['house_volume'] = 250  # Example house volume in m^3
+simulation.input['required_temperature'] = 19  # Example expected temperature in °C
+simulation.input['avg_temperature_forecast'] = 3  # Example outside temperature in °C
 
 # Perform the Simulation
 simulation.compute()
