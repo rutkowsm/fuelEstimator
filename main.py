@@ -67,11 +67,12 @@ rule6 = ctrl.Rule(house_volume['medium'] & required_temperature['warm'] & avg_te
 rule7 = ctrl.Rule(house_volume['medium'] & required_temperature['cold'] & avg_temperature_forecast['warm'], gas_needed['medium'])
 rule8 = ctrl.Rule(house_volume['large'] & required_temperature['cold'] & avg_temperature_forecast['moderate'], gas_needed['medium'])
 rule9 = ctrl.Rule(house_volume['large'] & required_temperature['medium'] & avg_temperature_forecast['warm'], gas_needed['medium'])
+rule10 = ctrl.Rule(house_volume['medium'] & required_temperature['medium'] & avg_temperature_forecast['warm'], gas_needed['medium'])
 
 """
 System kontroli
 """
-system = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9])
+system = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9, rule10])
 
 """
 Symulacja
@@ -81,12 +82,12 @@ simulation = ctrl.ControlSystemSimulation(system)
 """
 Deklaracja wartości zmiennych wyjściowych
 """
-simulation.input['house_volume'] = 900  # Example house volume in m^3
-simulation.input['required_temperature'] = 24  # Example expected temperature in °C
-simulation.input['avg_temperature_forecast'] = -15  # Example outside temperature in °C
+simulation.input['house_volume'] = 450  # Example house volume in m^3
+simulation.input['required_temperature'] = 21  # Example expected temperature in °C
+simulation.input['avg_temperature_forecast'] = 6  # Example outside temperature in °C
 
 """
-Oliczenie
+Obliczenie
 """
 simulation.compute()
 
