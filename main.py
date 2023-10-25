@@ -2,7 +2,7 @@
 Program szacujący potencjalne zużycie gazu ziemnego w sezonie grzewczym
 Autorzy:
 Rutkowski, Marcin (s12497)
-Reinke, Łukasz (s.....)
+Reinke, Łukasz (s15037)
 """
 
 import numpy as np
@@ -82,9 +82,13 @@ simulation = ctrl.ControlSystemSimulation(system)
 """
 Deklaracja wartości zmiennych wyjściowych
 """
-simulation.input['house_volume'] = 450  # Example house volume in m^3
-simulation.input['required_temperature'] = 21  # Example expected temperature in °C
-simulation.input['avg_temperature_forecast'] = 6  # Example outside temperature in °C
+house_volume_input = int(input("Podaj kubaturę budynku: "))
+required_temperature_input = int(input("Podaj oczekiwaną temperaturę wnętrza: "))
+avg_temperature_forecast_input = int(input("Podaj prognozowaną średnią temperaturę: "))
+
+simulation.input['house_volume'] = house_volume_input  # Example house volume in m^3
+simulation.input['required_temperature'] = required_temperature_input  # Example expected temperature in °C
+simulation.input['avg_temperature_forecast'] = avg_temperature_forecast_input  # Example outside temperature in °C
 
 """
 Obliczenie
@@ -94,4 +98,4 @@ simulation.compute()
 """
 Wywołanie
 """
-print(simulation.output['gas_needed'])
+print(f"Zalecana ilość oleju opałowego: {round(simulation.output['gas_needed'], 2)}")
