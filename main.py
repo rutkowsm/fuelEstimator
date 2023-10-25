@@ -3,6 +3,19 @@ Program szacujący potencjalne zużycie gazu ziemnego w sezonie grzewczym
 Autorzy:
 Rutkowski, Marcin (s12497)
 Reinke, Łukasz (s15037)
+
+Przygotowanie środowiska:
+1. Instalacja biblioteki scikit-fuzzy:
+pip install scikit-fuzzy
+2. Instalacja biblioteki numpy:
+pip install numpy
+
+Instrukcja:
+Program zapyta o podanie trzech parametrów:
+- kubatury budynku w m3
+- oczekiwanej temperatury wnętrza w stopniach Celsjusza
+- prognozowanej średniej temperatury na zewnątrz w stopniach Celsjusza
+Po przeliczeniu parametrów program zwróci sugerowaną liczbę litrów oleju opałowego potrzebną na sezon
 """
 
 import numpy as np
@@ -23,7 +36,7 @@ avg_temperature_forecast = ctrl.Antecedent(np.arange(-20, 15, 1), 'avg_temperatu
 Zmienna wyjściowa:
 gas_needed - ilość gazu potrzebnego w m3 (min: 0, max: 100)
 """
-gas_needed = ctrl.Consequent(np.arange(0, 101, 1), 'gas_needed')
+gas_needed = ctrl.Consequent(np.arange(0, 1001, 1), 'gas_needed')
 
 """
 Membership functions dla kubatury budynku
@@ -50,9 +63,9 @@ avg_temperature_forecast['warm'] = fuzz.trimf(avg_temperature_forecast.universe,
 """
 Membership functions dla zapotrzebowania na gaz
 """
-gas_needed['low'] = fuzz.trimf(gas_needed.universe, [0, 30, 60])
-gas_needed['medium'] = fuzz.trimf(gas_needed.universe, [40, 60, 80])
-gas_needed['high'] = fuzz.trimf(gas_needed.universe, [70, 90, 100])
+gas_needed['low'] = fuzz.trimf(gas_needed.universe, [0, 300, 600])
+gas_needed['medium'] = fuzz.trimf(gas_needed.universe, [400, 600, 800])
+gas_needed['high'] = fuzz.trimf(gas_needed.universe, [700, 900, 1000])
 
 
 """
@@ -98,4 +111,4 @@ simulation.compute()
 """
 Wywołanie
 """
-print(f"Zalecana ilość oleju opałowego: {round(simulation.output['gas_needed'], 2)}")
+print(f"Zalecana ilość oleju opałowego: {round(simulation.output['gas_needed'], 2)} l")
